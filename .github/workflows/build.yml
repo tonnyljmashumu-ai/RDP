@@ -18,11 +18,11 @@ jobs:
       
       - name: Build application
         run: |
-          python setup.py build -j 4
+          python setup.py build -j 8 --optimize=2
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: build/
-          compression-level: 6
+          compression-level: 9
