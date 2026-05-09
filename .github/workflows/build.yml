@@ -25,22 +25,6 @@ jobs:
         run: |
           python setup.py build
       
-      - name: Connect to Remote Windows PC via RDP
-        run: |
-          $username = "${{ secrets.RDP_USERNAME }}"
-          $password = "${{ secrets.RDP_PASSWORD }}"
-          $computerName = "${{ secrets.RDP_HOST }}"
-          
-          # Create secure credentials
-          $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-          $credentials = New-Object System.Management.Automation.PSCredential($username, $securePassword)
-          
-          # Test RDP connection
-          Write-Host "Attempting to connect to $computerName..."
-          Test-NetConnection -ComputerName $computerName -Port 3389 -WarningAction SilentlyContinue
-          
-          Write-Host "RDP Connection credentials ready for $username@$computerName"
-      
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
